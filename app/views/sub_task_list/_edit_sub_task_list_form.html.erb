@@ -1,0 +1,55 @@
+<div class="splitcontent">
+    <div id="edit-sub_tasks" class="splitcontentleft">
+        <p>
+            <%= label_tag "Sub Task List", nil, class: "sub_task-add" %>
+            <%= link_to "Add",
+                        "javascript:void(0);",
+                        :onclick => "addSubTask(event); return false;",
+                        title: "Add",
+                        class: "icon-only icon-add sub_task-add" %>
+        </p>
+        <% [0, 1, 2].each_with_index do |item, index| %>
+        <p>
+            <%= text_field_tag "items[][text]", nil, size: 100, placeholder: "Task", tabindex: 10000 + index %>
+            <%= link_to "", "javascript:void(0);", class: "icon-only icon-del sub_task-delete", onclick: "deletesub_task(event); return false;" %>
+        </p>
+        <% end %>
+    </div>
+</div>
+
+<script>
+//<![CDATA[
+    function addSubTask(e) {
+        e.preventDefault();
+        var p = document.createElement('p');
+
+        var input = document.createElement('input');
+        input.setAttribute('name', 'items[][text]');
+        input.setAttribute('value', '');
+        input.setAttribute('type', 'text');
+        input.setAttribute('size', '100');
+        input.setAttribute('placeholder', 'Task');
+        input.style.marginLeft = '4px';
+        var count = $("#edit-sub_tasks").children().length;
+        input.setAttribute('tabindex', 10000 + count);
+
+        var a = document.createElement('a');
+        a.setAttribute('href', 'javascript:void(0);');
+        a.setAttribute('onclick', 'deletesub_task(event); return false;');
+        a.setAttribute('class', 'icon-only icon-del sub_task-delete');
+        a.style.marginLeft = '4px';
+
+        p.appendChild(input);
+        p.appendChild(a);
+
+        var divElement = document.querySelector('#edit-sub_tasks');
+        divElement.appendChild(p);
+    }
+
+    function deletesub_task(e) {
+        e.preventDefault();
+        var deleteElement = e.target.parentElement;
+        deleteElement.remove();
+    }
+//]]>
+</script>
