@@ -47,6 +47,7 @@ module SubTaskList
         sub_task.parent_id = issue.id
         sub_task.root_id = issue.root_id
         sub_task.is_private = issue.is_private
+        sub_task.estimated_hours = item["estimated_hours"]
         sub_tasks << sub_task
       end
       sub_tasks.each do |sub_task|
@@ -57,7 +58,7 @@ module SubTaskList
     def items_params(context={})
       if context[:params][:items].present?
         context[:params].require(:items).map do |item|
-          item.permit(:text) if !item[:text].blank?
+          item.permit(:text, :estimated_hours) if !item[:text].blank?
         end.compact
       else
         {}
