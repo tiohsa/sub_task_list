@@ -10,8 +10,10 @@
         </p>
         <% [0, 1, 2].each_with_index do |item, index| %>
         <p>
-            <%= text_field_tag "items[][text]", nil, size: 100, placeholder: "Task", tabindex: 10000 + index %>
-            <%= number_field_tag "items[][estimated_hours]", nil, min: 0, max: 5, step: 0.25, style: "width: 60px;", placeholder: "Hours", tabindex: 11000 + index %>
+            <%= text_field_tag "items[][text]", nil, size: 60, placeholder: "Task", tabindex: 10000 + index %>
+            <%= text_field_tag "items[][start_date]", nil, type: "date", tabindex: 11000 + index %>
+            <%= text_field_tag "items[][due_date]", nil, type: "date", tabindex: 12000 + index %>
+            <%= number_field_tag "items[][estimated_hours]", nil, min: 0, max: 5, step: 0.25, style: "width: 60px;", placeholder: "Hours", tabindex: 13000 + index %>
             <%= link_to "", "javascript:void(0);", class: "icon-only icon-del sub_task-delete", onclick: "deletesub_task(event); return false;" %>
         </p>
         <% end %>
